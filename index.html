@@ -515,7 +515,7 @@
   function startPolling() {
     if (pollTimer) clearInterval(pollTimer);
     fetchAndRender();
-    pollTimer = setInterval(fetchAndRender, 8000);
+    pollTimer = setInterval(fetchAndRender, 3000);
   }
 
   function fetchAndRender() {
