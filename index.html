@@ -302,7 +302,6 @@
   var lastActiveIdx = -1;
   var pollTimer     = null;
   var lastDocText   = '';
-  var lastRevision  = null; // skip render if doc hasn't changed
   var keywords      = { primary: [], secondary: [], lsi: [] };
 
   // ── Collapsible ──
@@ -528,12 +527,6 @@
     .then(function(r) { if (r.status === 401) { accessToken = null; return null; } return r.json(); })
     .then(function(doc) {
       if (!doc) return;
-      // Skip if doc revision unchanged
-      if (doc.revisionId && doc.revisionId === lastRevision) {
-        document.getElementById('statusBar').textContent = 'No changes · ' + new Date().toLocaleTimeString();
-        return;
-      }
-      lastRevision = doc.revisionId || null;
       var data = analyzeGoogleDoc(doc);
       if (!baseline) {
         baseline = { totalWords: data.totalWords, sections: {} };
