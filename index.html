@@ -46,7 +46,7 @@
     .session-card { background: #1a73e8; color: white; border-radius: 12px; padding: 14px 18px; margin-bottom: 14px; }
     .session-label { font-size: 11px; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 2px; }
     .session-count { font-size: 52px; font-weight: 700; line-height: 1; }
-    .session-sub { font-size: 12px; opacity: 0.75; margin-top: 4px; }
+    .session-sub { font-size: 11px; opacity: 0.75; margin-top: 4px; }
 
     /* ── Currently Writing card ── */
     .writing-card { background: white; border: 2px solid #81c784; border-radius: 12px; padding: 14px 18px; margin-bottom: 14px; display: none; }
@@ -68,19 +68,17 @@
     .collapsible-body.open { display: block; }
 
     /* ── Keyword tracker ── */
-    .kw-target-row { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid #f1f3f4; }
+    .kw-target-row { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid #f1f3f4; flex-wrap: wrap; }
     .kw-target-label { font-size: 12px; color: #5f6368; }
     .kw-target-input { width: 80px; padding: 5px 8px; border: 1px solid #dadce0; border-radius: 6px; font-size: 13px; }
     .kw-target-input:focus { outline: none; border-color: #1a73e8; }
     .kw-target-sub { font-size: 11px; color: #9e9e9e; }
 
-    /* Keyword list */
     .kw-list { margin-bottom: 10px; }
     .kw-empty { font-size: 12px; color: #bdbdbd; text-align: center; padding: 12px 0; }
 
     .kw-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #f5f5f5; }
     .kw-item:last-child { border-bottom: none; }
-
     .kw-tier-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 2px; }
     .kw-tier-dot.primary   { background: #1a73e8; }
     .kw-tier-dot.secondary { background: #e37400; }
@@ -109,17 +107,16 @@
     .kw-delete { background: none; border: none; color: #e0e0e0; font-size: 18px; cursor: pointer; padding: 0; flex-shrink: 0; line-height: 1; }
     .kw-delete:hover { color: #d93025; }
 
-    /* Add keyword area */
     .kw-add-section { margin-top: 12px; border-top: 1px solid #f1f3f4; padding-top: 12px; }
     .kw-add-toggle { width: 100%; background: #f8f9fa; border: 1px dashed #dadce0; border-radius: 6px; padding: 7px; font-size: 12px; color: #5f6368; cursor: pointer; text-align: center; }
-    .kw-add-toggle:hover { background: #f1f3f4; border-color: #bdbdbd; }
+    .kw-add-toggle:hover { background: #f1f3f4; }
     .kw-add-form { display: none; margin-top: 10px; }
     .kw-add-form.open { display: block; }
-    .kw-add-row { display: flex; gap: 6px; margin-bottom: 6px; align-items: center; }
+    .kw-add-row { display: flex; gap: 6px; align-items: center; }
     .kw-tier-select { padding: 5px 8px; border: 1px solid #dadce0; border-radius: 6px; font-size: 12px; background: white; }
     .kw-text-input { flex: 1; padding: 6px 8px; border: 1px solid #dadce0; border-radius: 6px; font-size: 13px; }
     .kw-text-input:focus { outline: none; border-color: #1a73e8; }
-    .kw-add-btn { background: #1a73e8; color: white; border: none; border-radius: 6px; padding: 6px 14px; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .kw-add-btn { background: #1a73e8; color: white; border: none; border-radius: 6px; padding: 6px 14px; font-size: 12px; font-weight: 600; cursor: pointer; }
     .kw-add-btn:hover { background: #1557b0; }
 
     /* ── Shortcuts ── */
@@ -190,14 +187,12 @@
           <button class="reset-btn" onclick="resetBaseline()">Reset Baseline</button>
         </div>
 
-        <!-- Session total -->
         <div class="session-card">
           <div class="session-label">New Words This Session</div>
           <div class="session-count" id="totalWords">—</div>
           <div class="session-sub" id="totalSub">Load a doc to begin</div>
         </div>
 
-        <!-- Currently Writing -->
         <div class="writing-card" id="writingCard">
           <div class="writing-eyebrow">✏️ Currently Writing</div>
           <div class="writing-section" id="writingSection"></div>
@@ -220,19 +215,12 @@
             <span class="collapsible-toggle" id="kwToggle">▼ Show</span>
           </div>
           <div class="collapsible-body open" id="kwBody">
-
             <div class="kw-target-row">
               <span class="kw-target-label">Target word count:</span>
               <input class="kw-target-input" id="kwTargetWords" type="number" placeholder="e.g. 1000" oninput="saveKeywords(); renderKeywords();" />
               <span class="kw-target-sub" id="kwTargetSub"></span>
             </div>
-
-            <!-- Keyword list -->
-            <div class="kw-list" id="kwList">
-              <div class="kw-empty">No keywords added yet.</div>
-            </div>
-
-            <!-- Add keyword area -->
+            <div class="kw-list" id="kwList"><div class="kw-empty">No keywords added yet.</div></div>
             <div class="kw-add-section">
               <button class="kw-add-toggle" onclick="toggleAddForm()" id="kwAddToggle">+ Add Keyword</button>
               <div class="kw-add-form" id="kwAddForm">
@@ -247,7 +235,6 @@
                 </div>
               </div>
             </div>
-
           </div>
         </div>
 
@@ -284,15 +271,21 @@
   </div>
 
 <script>
+  // ============================================================
+  // CONFIG
+  // ============================================================
   var CLIENT_ID = '1018857718455-4ousmcvb2j5ha85b9uatp0q6928dvs83.apps.googleusercontent.com';
   var API_KEY   = 'AIzaSyBsN7w69HYM_9O_ZvBnkhIr98sksWblORQ';
   var SCOPES    = 'https://www.googleapis.com/auth/documents.readonly';
 
-  var STOP_WORDS = new Set(['a','an','the','and','or','but','in','on','at','to','for','of','with','by','from','is','are','was','were','be','been','being','it','its','this','that','these','those','as','if','so']);
   var CHAR_KEYWORDS = ['meta description', 'title tag'];
   var WORD_KEYWORDS = ['key takeaways', 'alt text', 'file name'];
-  var LIMITS = { 'meta description': 160, 'title tag': 60 };
+  var LIMITS        = { 'meta description': 160, 'title tag': 60 };
+  var STOP_WORDS    = new Set(['a','an','the','and','or','but','in','on','at','to','for','of','with','by','from','is','are','was','were','be','been','being','it','its','this','that','these','those','as','if','so']);
 
+  // ============================================================
+  // STATE
+  // ============================================================
   var tokenClient   = null;
   var accessToken   = null;
   var currentDocId  = null;
@@ -304,7 +297,9 @@
   var lastDocText   = '';
   var keywords      = { primary: [], secondary: [], lsi: [] };
 
-  // ── Collapsible ──
+  // ============================================================
+  // UI HELPERS
+  // ============================================================
   function togglePanel(bodyId, toggleId) {
     var body = document.getElementById(bodyId);
     var tog  = document.getElementById(toggleId);
@@ -317,56 +312,77 @@
     var btn  = document.getElementById('kwAddToggle');
     var open = form.classList.toggle('open');
     btn.textContent = open ? '− Cancel' : '+ Add Keyword';
-    if (open) document.getElementById('kwTextInput').focus();
+    if (open) setTimeout(function(){ document.getElementById('kwTextInput').focus(); }, 50);
   }
 
-  // ── Keyword storage ──
+  function escHtml(str) {
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // ============================================================
+  // KEYWORD STORAGE
+  // ============================================================
   function kwKey() { return currentDocId ? 'kw_' + currentDocId : null; }
 
   function saveKeywords() {
     var key = kwKey();
     if (!key) return;
-    try { localStorage.setItem(key, JSON.stringify({ keywords: keywords, targetWords: document.getElementById('kwTargetWords').value })); } catch(e) {}
+    try {
+      localStorage.setItem(key, JSON.stringify({
+        keywords:    keywords,
+        targetWords: document.getElementById('kwTargetWords').value
+      }));
+    } catch(e) {}
   }
 
   function loadKeywords() {
     var key = kwKey();
+    keywords = { primary: [], secondary: [], lsi: [] };
     if (!key) return;
     try {
       var raw = localStorage.getItem(key);
-      if (!raw) { keywords = { primary: [], secondary: [], lsi: [] }; return; }
+      if (!raw) return;
       var data = JSON.parse(raw);
       keywords = data.keywords || { primary: [], secondary: [], lsi: [] };
       document.getElementById('kwTargetWords').value = data.targetWords || '';
-    } catch(e) { keywords = { primary: [], secondary: [], lsi: [] }; }
+    } catch(e) {}
   }
 
-  // ── Keyword matching ──
-  function normalize(text) { return text.toLowerCase().replace(/[-_]/g,' ').replace(/[^a-z0-9 ]/g,'').replace(/\s+/g,' ').trim(); }
-  function sigWords(text) { return normalize(text).split(' ').filter(function(w){ return w && !STOP_WORDS.has(w); }); }
+  // ============================================================
+  // KEYWORD MATCHING
+  // ============================================================
+  function normalize(text) {
+    return text.toLowerCase().replace(/[-_]/g,' ').replace(/[^a-z0-9 ]/g,'').replace(/\s+/g,' ').trim();
+  }
+
+  function sigWords(text) {
+    return normalize(text).split(' ').filter(function(w){ return w && !STOP_WORDS.has(w); });
+  }
+
   function pluralForms(word) {
     var forms = [word];
-    if (word.endsWith('s')) forms.push(word.slice(0,-1));
+    if (word.endsWith('s')) { forms.push(word.slice(0,-1)); }
     else { forms.push(word+'s'); if (word.endsWith('y')) forms.push(word.slice(0,-1)+'ies'); }
     return forms;
   }
 
   function countKeyword(kwText, docText) {
     var kwSig = sigWords(kwText);
-    if (!kwSig.length) return 0;
+    if (!kwSig.length || !docText) return 0;
     var docWords = normalize(docText).split(' ');
     var kwForms  = kwSig.map(function(w){ return pluralForms(w); });
-    var count = 0;
-    var matched = new Array(docWords.length).fill(false);
-    var windowSize = 6;
+    var count    = 0;
+    var matched  = new Array(docWords.length).fill(false);
+    var winSize  = 6;
     for (var i = 0; i < docWords.length; i++) {
       if (matched[i]) continue;
-      var window = docWords.slice(i, i + windowSize + kwSig.length);
-      var allFound = true; var lastPos = -1;
+      var win      = docWords.slice(i, i + winSize + kwSig.length);
+      var allFound = true;
+      var lastPos  = -1;
       for (var k = 0; k < kwForms.length; k++) {
         var found = false;
-        for (var w = 0; w < window.length; w++) {
-          if (kwForms[k].indexOf(window[w]) >= 0) { found = true; lastPos = Math.max(lastPos, w); break; }
+        for (var w = 0; w < win.length; w++) {
+          if (kwForms[k].indexOf(win[w]) >= 0) { found = true; lastPos = Math.max(lastPos, w); break; }
         }
         if (!found) { allFound = false; break; }
       }
@@ -379,18 +395,24 @@
     return count;
   }
 
-  // ── Targets ──
+  // ============================================================
+  // KEYWORD TARGETS
+  // ============================================================
   function getTargets() {
     var tw = parseInt(document.getElementById('kwTargetWords').value) || 0;
     if (!tw) return null;
     return {
-      primaryMin: Math.max(1, Math.floor(tw/150)), primaryMax: Math.floor(tw/100),
-      secMin:     Math.max(1, Math.floor(tw/250)), secMax:     Math.floor(tw/150),
+      primaryMin: Math.max(1, Math.floor(tw/150)),
+      primaryMax: Math.floor(tw/100),
+      secMin:     Math.max(1, Math.floor(tw/250)),
+      secMax:     Math.floor(tw/150),
       lsiMin: 1, lsiMax: null
     };
   }
 
-  // ── Add keyword ──
+  // ============================================================
+  // KEYWORD UI
+  // ============================================================
   function addKeyword() {
     var tier = document.getElementById('kwTierSelect').value;
     var text = document.getElementById('kwTextInput').value.trim();
@@ -408,14 +430,12 @@
 
   function deleteKeyword(tier, id) {
     keywords[tier] = keywords[tier].filter(function(k){ return k.id !== id; });
-    saveKeywords(); renderKeywords();
+    saveKeywords();
+    renderKeywords();
   }
 
-  // ── Render keywords ──
   function renderKeywords() {
     var targets = getTargets();
-
-    // Update target sub-label
     var sub = document.getElementById('kwTargetSub');
     if (targets) sub.textContent = 'Primary: ' + targets.primaryMin + '–' + targets.primaryMax + ' | Sec: ' + targets.secMin + '–' + targets.secMax;
     else sub.textContent = '';
@@ -430,8 +450,8 @@
 
     var html = '';
     allKws.forEach(function(item) {
-      var kw   = item.kw;
-      var tier = item.tier;
+      var kw        = item.kw;
+      var tier      = item.tier;
       var rawCount  = countKeyword(kw.text, lastDocText);
       var baseCount = kwBaseline[kw.id] !== undefined ? kwBaseline[kw.id] : 0;
       var count     = Math.max(0, rawCount - baseCount);
@@ -445,13 +465,13 @@
 
       var statusClass = 'none', metaText = '', barPct = 0, barClass = '';
       if (min !== null && targets) {
-        if (count === 0)            { statusClass='none'; metaText='Needs '+min+(max?'–'+max:'+')+' appearances'; }
-        else if (count < min)       { statusClass='low';  metaText='Needs '+min+(max?'–'+max:'+'); barPct=Math.round((count/min)*80); barClass='low'; }
-        else if (max && count > max){ statusClass='over'; metaText='Over by '+(count-max); barPct=100; barClass='over'; }
-        else                        { statusClass='good'; metaText='On target ✓'; barPct=max?Math.round((count/max)*100):100; barClass='good'; }
+        if (count === 0)             { statusClass='none'; metaText='Needs '+min+(max?'–'+max:'+'); }
+        else if (count < min)        { statusClass='low';  metaText='Needs '+min+(max?'–'+max:'+'); barPct=Math.round((count/min)*80); barClass='low'; }
+        else if (max && count > max) { statusClass='over'; metaText='Over by '+(count-max); barPct=100; barClass='over'; }
+        else                         { statusClass='good'; metaText='On target ✓'; barPct=max?Math.round((count/max)*100):100; barClass='good'; }
       } else {
         statusClass = count > 0 ? 'good' : 'none';
-        metaText = count > 0 ? 'Found' : 'Not found yet';
+        metaText    = count > 0 ? 'Found' : 'Not found yet';
       }
 
       var barHtml = min !== null ? '<div class="kw-bar-wrap"><div class="kw-bar-fill '+barClass+'" style="width:'+barPct+'%"></div></div>' : '';
@@ -472,11 +492,14 @@
     container.innerHTML = html;
   }
 
-  // ── Auth ──
+  // ============================================================
+  // AUTH
+  // ============================================================
   function initGoogleAuth() {
     if (typeof google === 'undefined') { setTimeout(initGoogleAuth, 500); return; }
     tokenClient = google.accounts.oauth2.initTokenClient({
-      client_id: CLIENT_ID, scope: SCOPES,
+      client_id: CLIENT_ID,
+      scope: SCOPES,
       callback: function(resp) {
         if (resp.error) return;
         accessToken = resp.access_token;
@@ -486,9 +509,12 @@
       }
     });
   }
+
   function handleAuth() { if (!accessToken && tokenClient) tokenClient.requestAccessToken(); }
 
-  // ── Doc loading ──
+  // ============================================================
+  // DOC LOADING
+  // ============================================================
   function extractDocId(url) { var m = url.match(/\/d\/([a-zA-Z0-9_-]+)/); return m ? m[1] : null; }
 
   function loadDoc() {
@@ -496,22 +522,30 @@
     if (!url) return;
     var docId = extractDocId(url);
     if (!docId) { alert('Please paste a valid Google Doc URL.'); return; }
+
     currentDocId  = docId;
-    baseline      = getStoredBaseline(docId);
-    kwBaseline    = getStoredKwBaseline(docId) || {};
+    lastDocText   = '';
     prevSnapshot  = {};
     lastActiveIdx = -1;
-    lastDocText   = '';
+
+    // Load stored baseline and keywords
+    baseline   = getStoredBaseline(docId);
+    kwBaseline = getStoredKwBaseline(docId) || {};
     loadKeywords();
+
+    // Load doc in iframe
     var frame = document.getElementById('docFrame');
     frame.src = 'https://docs.google.com/document/d/' + docId + '/edit?usp=sharing&rm=minimal';
     frame.style.display = 'block';
     document.getElementById('docPlaceholder').style.display = 'none';
+
     if (accessToken) startPolling();
     else document.getElementById('sectionsContainer').innerHTML = '<div class="needs-auth"><strong>Sign in with Google</strong> to enable live word counting.</div>';
   }
 
-  // ── Polling ──
+  // ============================================================
+  // POLLING
+  // ============================================================
   function startPolling() {
     if (pollTimer) clearInterval(pollTimer);
     fetchAndRender();
@@ -523,70 +557,104 @@
     fetch('https://docs.googleapis.com/v1/documents/' + currentDocId, {
       headers: { 'Authorization': 'Bearer ' + accessToken }
     })
-    .then(function(r) { if (r.status === 401) { accessToken = null; return null; } return r.json(); })
+    .then(function(r) {
+      if (r.status === 401) { accessToken = null; return null; }
+      return r.json();
+    })
     .then(function(doc) {
       if (!doc) return;
       var data = analyzeGoogleDoc(doc);
+
+      // Set baseline on first fetch
       if (!baseline) {
         baseline = { totalWords: data.totalWords, sections: {} };
         data.sections.forEach(function(s, idx) {
-          baseline.sections[idx] = { headingWords: s.headingWords, bodyWords: s.bodyWords, allSpecialWords: s.allSpecialWords };
+          baseline.sections[idx] = {
+            headingWords:    s.headingWords,
+            bodyWords:       s.bodyWords,
+            allSpecialWords: s.allSpecialWords
+          };
         });
         storeBaseline(currentDocId, baseline);
+        // Build keyword baseline from initial doc text
         buildKwBaseline(lastDocText);
       }
+
       render(data);
-      renderKeywords(); // called after analyzeGoogleDoc sets lastDocText
+      renderKeywords();
       document.getElementById('statusBar').textContent = 'Updated ' + new Date().toLocaleTimeString();
     })
-    .catch(function(e) { document.getElementById('statusBar').textContent = 'Error: ' + e.message; });
+    .catch(function(e) {
+      document.getElementById('statusBar').textContent = 'Error: ' + e.message;
+    });
   }
 
-  // ── Parser ──
+  // ============================================================
+  // DOCUMENT ANALYSIS
+  // ============================================================
   function analyzeGoogleDoc(doc) {
-    var content = doc.body.content || [];
-    var sections = [], specialSections = [];
-    var currentSection = null, currentSpecial = null, totalWords = 0;
-    var fullText = '';
+    var content        = doc.body.content || [];
+    var sections       = [];
+    var specialSections = [];
+    var currentSection = null;
+    var currentSpecial = null;
+    var totalWords     = 0;
+    var fullText       = '';
 
     content.forEach(function(block) {
       if (!block.paragraph) return;
-      var para  = block.paragraph;
-      var style = (para.paragraphStyle && para.paragraphStyle.namedStyleType) || 'NORMAL_TEXT';
+      var para      = block.paragraph;
+      var style     = (para.paragraphStyle && para.paragraphStyle.namedStyleType) || 'NORMAL_TEXT';
       var isHeading = style.indexOf('HEADING') === 0;
       var isList    = para.bullet !== undefined;
+
       var text = '';
       (para.elements || []).forEach(function(el) { if (el.textRun) text += el.textRun.content || ''; });
       text = text.replace(/\n$/, '').trim();
       fullText += ' ' + text;
       if (!text) return;
+
       var firstEl = (para.elements || [])[0];
       var isBold  = firstEl && firstEl.textRun && firstEl.textRun.textStyle && firstEl.textRun.textStyle.bold === true;
 
+      // List item
       if (isList) {
-        var lwc = countWords(text); totalWords += lwc;
+        var lwc = countWords(text);
+        totalWords += lwc;
         if (currentSpecial) { currentSpecial.listWords += lwc; if (currentSection) currentSection.allSpecialWords += lwc; }
         else if (currentSection) currentSection.bodyWords += lwc;
         return;
       }
+
+      // Heading
       if (isHeading) {
         var level = style.replace('HEADING_', '');
         currentSection = { label: 'H'+level, headingText: text, headingWords: countWords(text), bodyWords: 0, allSpecialWords: 0, specialItems: [] };
-        sections.push(currentSection); currentSpecial = null; totalWords += countWords(text); return;
+        sections.push(currentSection);
+        currentSpecial = null;
+        totalWords += countWords(text);
+        return;
       }
+
+      // Bold special keyword line
       if (isBold) {
         var kwType = classifyBoldLine(text);
         if (kwType) {
           var colonIdx = text.indexOf(':');
-          var value = colonIdx >= 0 ? text.substring(colonIdx + 1).trim() : '';
-          var specialItem = { label: text.split(':')[0].trim(), type: kwType, value: value, wordCount: countWords(value), charCount: value.length, listWords: 0 };
-          if (currentSection) { currentSection.specialItems.push(specialItem); currentSection.allSpecialWords += countWords(value); }
-          else specialSections.push(specialItem);
-          currentSpecial = specialItem; totalWords += countWords(value); return;
+          var value    = colonIdx >= 0 ? text.substring(colonIdx + 1).trim() : '';
+          var item     = { label: text.split(':')[0].trim(), type: kwType, value: value, wordCount: countWords(value), charCount: value.length, listWords: 0 };
+          if (currentSection) { currentSection.specialItems.push(item); currentSection.allSpecialWords += countWords(value); }
+          else specialSections.push(item);
+          currentSpecial = item;
+          totalWords += countWords(value);
+          return;
         }
       }
+
+      // Regular body
       currentSpecial = null;
-      var bwc = countWords(text); totalWords += bwc;
+      var bwc = countWords(text);
+      totalWords += bwc;
       if (currentSection) currentSection.bodyWords += bwc;
     });
 
@@ -595,23 +663,28 @@
   }
 
   function countWords(text) { var t = (text||'').trim(); return t ? t.split(/\s+/).length : 0; }
+
   function classifyBoldLine(text) {
     var lower = text.toLowerCase().trim();
     for (var i = 0; i < CHAR_KEYWORDS.length; i++) { if (lower.indexOf(CHAR_KEYWORDS[i]) === 0) return 'char'; }
     for (var j = 0; j < WORD_KEYWORDS.length; j++) { if (lower.indexOf(WORD_KEYWORDS[j]) === 0) return 'word'; }
     return null;
   }
+
   function getLimitForLabel(label) {
     var lower = label.toLowerCase();
     for (var key in LIMITS) { if (lower.indexOf(key) >= 0) return LIMITS[key]; }
     return null;
   }
 
-  // ── Baseline storage ──
-  function getStoredBaseline(docId) { try { var r = localStorage.getItem('baseline_'+docId); return r ? JSON.parse(r) : null; } catch(e) { return null; } }
-  function storeBaseline(docId, b) { try { localStorage.setItem('baseline_'+docId, JSON.stringify(b)); } catch(e) {} }
+  // ============================================================
+  // BASELINE STORAGE
+  // ============================================================
+  function getStoredBaseline(docId)   { try { var r = localStorage.getItem('baseline_'+docId);   return r ? JSON.parse(r) : null; } catch(e) { return null; } }
+  function storeBaseline(docId, b)    { try { localStorage.setItem('baseline_'+docId, JSON.stringify(b)); } catch(e) {} }
   function getStoredKwBaseline(docId) { try { var r = localStorage.getItem('kwbaseline_'+docId); return r ? JSON.parse(r) : null; } catch(e) { return null; } }
-  function storeKwBaseline(docId, b) { try { localStorage.setItem('kwbaseline_'+docId, JSON.stringify(b)); } catch(e) {} }
+  function storeKwBaseline(docId, b)  { try { localStorage.setItem('kwbaseline_'+docId, JSON.stringify(b)); } catch(e) {} }
+
   function buildKwBaseline(text) {
     kwBaseline = {};
     ['primary','secondary','lsi'].forEach(function(tier) {
@@ -619,18 +692,21 @@
     });
     storeKwBaseline(currentDocId, kwBaseline);
   }
+
   function resetBaseline() {
     if (!currentDocId) return;
-    localStorage.removeItem('baseline_'+currentDocId);
-    localStorage.removeItem('kwbaseline_'+currentDocId);
-    baseline = null; kwBaseline = {}; fetchAndRender();
+    localStorage.removeItem('baseline_'   + currentDocId);
+    localStorage.removeItem('kwbaseline_' + currentDocId);
+    baseline   = null;
+    kwBaseline = {};
+    fetchAndRender();
   }
 
-  // ── Render ──
-  function escHtml(str) { return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-
+  // ============================================================
+  // RENDER
+  // ============================================================
   function buildSpecialItem(item) {
-    var limit = getLimitForLabel(item.label);
+    var limit  = getLimitForLabel(item.label);
     var isChar = item.type === 'char';
     var count  = isChar ? item.charCount : (item.wordCount + (item.listWords||0));
     var unit   = isChar ? ' chars' : ' words';
@@ -661,16 +737,12 @@
   }
 
   function render(data) {
-    var newWords = 0;
-    if (baseline) {
-      newWords = Math.max(0, data.totalWords - baseline.totalWords);
-    }
+    // New words this session
+    var newWords = baseline ? Math.max(0, data.totalWords - baseline.totalWords) : 0;
     document.getElementById('totalWords').textContent = newWords;
-    document.getElementById('totalSub').textContent = baseline
-      ? 'Baseline: ' + baseline.totalWords + ' words. Reset to restart.'
-      : 'Setting baseline…';
+    document.getElementById('totalSub').textContent   = baseline ? 'Baseline locked. Reset to restart.' : 'Setting baseline…';
 
-    // Active section
+    // Active section detection
     var activeSectionIdx = -1;
     data.sections.forEach(function(s, idx) {
       var cur  = s.headingWords + s.bodyWords + s.allSpecialWords;
@@ -680,11 +752,12 @@
     });
     if (activeSectionIdx >= 0) lastActiveIdx = activeSectionIdx;
 
+    // Currently Writing card
     var activeSection = data.sections[lastActiveIdx] || null;
-    var writingCard = document.getElementById('writingCard');
+    var writingCard   = document.getElementById('writingCard');
     if (activeSection) {
       writingCard.style.display = 'block';
-      document.getElementById('writingSection').innerHTML = '<strong>' + escHtml(activeSection.label) + ':</strong> ' + escHtml(activeSection.headingText);
+      document.getElementById('writingSection').innerHTML = '<strong>'+escHtml(activeSection.label)+':</strong> '+escHtml(activeSection.headingText);
       document.getElementById('writingTotal').textContent = activeSection.headingWords + activeSection.bodyWords + activeSection.allSpecialWords;
       document.getElementById('writingBody').textContent  = activeSection.bodyWords;
     } else {
@@ -700,7 +773,7 @@
       orphan.innerHTML = h;
     }
 
-    // Sections
+    // Section cards
     var container = document.getElementById('sectionsContainer');
     if (!data.sections || !data.sections.length) {
       container.innerHTML = '<div class="empty">No headings detected yet.<br>Apply H1/H2/H3 styles to create sections.</div>';
@@ -711,8 +784,12 @@
       var specialItems = (s.specialItems||[]).map(function(item) {
         return { label: item.label, type: item.type, value: item.value, wordCount: item.wordCount + item.listWords, charCount: item.charCount };
       });
-      html += buildSectionCard({ label: s.label, headingText: s.headingText, headingWords: s.headingWords, bodyWords: s.bodyWords,
-        totalWords: s.headingWords + s.bodyWords + s.allSpecialWords, specialItems: specialItems, isActive: idx === lastActiveIdx });
+      html += buildSectionCard({
+        label: s.label, headingText: s.headingText,
+        headingWords: s.headingWords, bodyWords: s.bodyWords,
+        totalWords: s.headingWords + s.bodyWords + s.allSpecialWords,
+        specialItems: specialItems, isActive: idx === lastActiveIdx
+      });
     });
     container.innerHTML = html;
   }
