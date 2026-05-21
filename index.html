@@ -27,117 +27,80 @@
       flex-shrink: 0;
       box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
-    .topbar-title {
-      color: white;
-      font-size: 15px;
-      font-weight: 600;
-      white-space: nowrap;
-    }
+    .topbar-title { color: white; font-size: 15px; font-weight: 600; white-space: nowrap; }
     .topbar-title span { opacity: 0.7; font-weight: 400; }
-
     .url-input {
-      flex: 1;
-      padding: 7px 12px;
-      border-radius: 6px;
-      border: none;
-      font-size: 13px;
-      background: rgba(255,255,255,0.15);
-      color: white;
-      outline: none;
+      flex: 1; padding: 7px 12px; border-radius: 6px; border: none;
+      font-size: 13px; background: rgba(255,255,255,0.15); color: white; outline: none;
     }
     .url-input::placeholder { color: rgba(255,255,255,0.6); }
     .url-input:focus { background: rgba(255,255,255,0.25); }
-
     .load-btn {
-      background: white;
-      color: #1a73e8;
-      border: none;
-      border-radius: 6px;
-      padding: 7px 16px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
+      background: white; color: #1a73e8; border: none; border-radius: 6px;
+      padding: 7px 16px; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap;
     }
     .load-btn:hover { background: #f1f3f4; }
-
     .auth-btn {
-      background: rgba(255,255,255,0.15);
-      color: white;
-      border: 1px solid rgba(255,255,255,0.4);
-      border-radius: 6px;
-      padding: 7px 12px;
-      font-size: 12px;
-      cursor: pointer;
-      white-space: nowrap;
+      background: rgba(255,255,255,0.15); color: white;
+      border: 1px solid rgba(255,255,255,0.4); border-radius: 6px;
+      padding: 7px 12px; font-size: 12px; cursor: pointer; white-space: nowrap;
     }
     .auth-btn:hover { background: rgba(255,255,255,0.25); }
     .auth-btn.signed-in { border-color: #81c784; color: #81c784; }
 
-    /* ── Main layout ── */
-    .main {
+    /* ── Highlighter bar ── */
+    .highlighter-bar {
+      background: #f1f3f4;
+      border-bottom: 1px solid #dadce0;
+      padding: 5px 12px;
       display: flex;
-      flex: 1;
-      overflow: hidden;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
     }
+    .hl-label { font-size: 11px; color: #5f6368; font-weight: 600; white-space: nowrap; }
+    .hl-btn {
+      width: 22px; height: 22px; border-radius: 4px; border: 1px solid rgba(0,0,0,0.15);
+      cursor: pointer; flex-shrink: 0; transition: transform 0.1s;
+    }
+    .hl-btn:hover { transform: scale(1.2); border-color: rgba(0,0,0,0.35); }
+    .hl-divider { width: 1px; height: 18px; background: #dadce0; margin: 0 2px; }
+    .hl-none-btn {
+      font-size: 10px; color: #5f6368; background: white;
+      border: 1px solid #dadce0; border-radius: 4px;
+      padding: 2px 6px; cursor: pointer; white-space: nowrap;
+    }
+    .hl-none-btn:hover { background: #f1f3f4; }
+    .hl-status { font-size: 10px; color: #9e9e9e; margin-left: 4px; }
+
+    /* ── Main layout ── */
+    .main { display: flex; flex: 1; overflow: hidden; }
 
     /* ── Doc frame ── */
-    .doc-panel {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      background: #f1f3f4;
-    }
-
+    .doc-panel { flex: 1; display: flex; flex-direction: column; background: #f1f3f4; }
     .doc-placeholder {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: #9e9e9e;
-      gap: 12px;
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      color: #9e9e9e; gap: 12px;
     }
     .doc-placeholder .icon { font-size: 48px; }
     .doc-placeholder h2 { font-size: 18px; color: #5f6368; }
     .doc-placeholder p { font-size: 13px; text-align: center; max-width: 320px; line-height: 1.5; }
-
-    #docFrame {
-      flex: 1;
-      border: none;
-      display: none;
-      background: white;
-    }
+    #docFrame { flex: 1; border: none; display: none; background: white; }
 
     /* ── Analytics sidebar ── */
     .analytics-panel {
-      width: 300px;
-      flex-shrink: 0;
-      background: #f8f9fa;
-      border-left: 1px solid #dadce0;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
+      width: 300px; flex-shrink: 0; background: #f8f9fa;
+      border-left: 1px solid #dadce0; display: flex; flex-direction: column; overflow: hidden;
     }
+    .analytics-inner { flex: 1; overflow-y: auto; padding: 12px; }
 
-    .analytics-inner {
-      flex: 1;
-      overflow-y: auto;
-      padding: 12px;
-    }
-
-    /* ── Header ── */
-    .panel-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 12px;
-    }
+    /* ── Panel header ── */
+    .panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
     .panel-title { font-size: 14px; font-weight: 600; color: #1a73e8; }
     .reset-btn {
       font-size: 11px; color: #5f6368; background: none;
-      border: 1px solid #dadce0; border-radius: 4px;
-      padding: 3px 8px; cursor: pointer;
+      border: 1px solid #dadce0; border-radius: 4px; padding: 3px 8px; cursor: pointer;
     }
     .reset-btn:hover { background: #f1f3f4; }
 
@@ -153,109 +116,71 @@
     /* ── Active banner ── */
     .active-banner {
       background: #e8f5e9; border: 1px solid #81c784;
-      border-radius: 8px; padding: 8px 12px; margin-bottom: 10px;
-      display: none;
+      border-radius: 8px; padding: 8px 12px; margin-bottom: 10px; display: none;
     }
-    .active-label-text {
-      font-size: 10px; font-weight: 700; color: #2e7d32;
-      text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px;
-    }
-    .active-heading-text {
-      font-size: 12px; font-weight: 600; color: #1b5e20;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
+    .active-label-text { font-size: 10px; font-weight: 700; color: #2e7d32; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+    .active-heading-text { font-size: 12px; font-weight: 600; color: #1b5e20; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .active-stats-text { font-size: 11px; color: #388e3c; margin-top: 2px; }
 
+    /* ── Shortcuts panel ── */
+    .shortcuts-panel {
+      background: white; border: 1px solid #e0e0e0;
+      border-radius: 8px; margin-bottom: 12px; overflow: hidden;
+    }
+    .shortcuts-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 12px; cursor: pointer; user-select: none;
+    }
+    .shortcuts-header:hover { background: #f8f9fa; }
+    .shortcuts-title { font-size: 12px; font-weight: 600; color: #5f6368; }
+    .shortcuts-toggle { font-size: 10px; color: #9e9e9e; }
+    .shortcuts-body { display: none; padding: 0 12px 10px; }
+    .shortcuts-body.open { display: block; }
+    .shortcut-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 3px 0; border-top: 1px solid #f1f3f4; font-size: 11px;
+    }
+    .shortcut-label { color: #5f6368; }
+    .shortcut-key {
+      background: #f1f3f4; border: 1px solid #dadce0; border-radius: 3px;
+      padding: 1px 5px; font-size: 10px; font-family: monospace; color: #202124;
+      white-space: nowrap;
+    }
+
     /* ── Divider ── */
-    .divider-label {
-      font-size: 10px; font-weight: 700; color: #9e9e9e;
-      text-transform: uppercase; letter-spacing: 0.6px; margin: 10px 0 6px;
-    }
-    .orphan-label {
-      font-size: 11px; font-weight: 600; color: #5f6368;
-      text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;
-    }
+    .divider-label { font-size: 10px; font-weight: 700; color: #9e9e9e; text-transform: uppercase; letter-spacing: 0.6px; margin: 10px 0 6px; }
+    .orphan-label { font-size: 11px; font-weight: 600; color: #5f6368; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
 
     /* ── Section cards ── */
-    .section-card {
-      background: white; border: 1px solid #e0e0e0;
-      border-radius: 8px; padding: 10px 12px; margin-bottom: 8px;
-    }
+    .section-card { background: white; border: 1px solid #e0e0e0; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; }
     .section-card.active { border-color: #81c784; background: #f1f8e9; }
-
-    .section-heading-row {
-      display: flex; align-items: baseline; gap: 6px; margin-bottom: 6px;
-    }
-    .badge {
-      font-size: 10px; font-weight: 700; padding: 1px 5px;
-      border-radius: 3px; flex-shrink: 0;
-    }
+    .section-heading-row { display: flex; align-items: baseline; gap: 6px; margin-bottom: 6px; }
+    .badge { font-size: 10px; font-weight: 700; padding: 1px 5px; border-radius: 3px; flex-shrink: 0; }
     .badge.h1 { background: #e8f0fe; color: #1a73e8; }
     .badge.h2 { background: #fce8e6; color: #d93025; }
     .badge.h3 { background: #e6f4ea; color: #188038; }
     .badge.active-dot::after { content: ' ●'; font-size: 8px; color: #2e7d32; }
-
-    .heading-title {
-      font-weight: 600; font-size: 12px; color: #202124;
-      flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-
-    .stat-row {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 3px 0; border-top: 1px solid #f1f3f4; font-size: 12px;
-    }
+    .heading-title { font-weight: 600; font-size: 12px; color: #202124; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .stat-row { display: flex; justify-content: space-between; align-items: center; padding: 3px 0; border-top: 1px solid #f1f3f4; font-size: 12px; }
     .stat-label { color: #5f6368; }
     .stat-value { font-weight: 600; color: #202124; }
     .stat-value.total-val { color: #1a73e8; font-size: 13px; }
 
     /* ── Special items ── */
-    .special-item {
-      background: #fff8e1; border: 1px solid #fdd835;
-      border-radius: 6px; padding: 7px 10px; margin-top: 6px;
-    }
-    .s-label {
-      font-size: 10px; font-weight: 700; color: #f57f17;
-      text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 3px;
-    }
+    .special-item { background: #fff8e1; border: 1px solid #fdd835; border-radius: 6px; padding: 7px 10px; margin-top: 6px; }
+    .s-label { font-size: 10px; font-weight: 700; color: #f57f17; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 3px; }
     .s-value { font-size: 11px; color: #5f6368; margin-bottom: 4px; word-break: break-word; }
     .s-count { font-size: 12px; font-weight: 700; color: #202124; }
     .s-count.over { color: #d93025; }
     .s-limit { font-size: 10px; color: #9e9e9e; margin-left: 4px; }
-
-    .char-bar {
-      height: 4px; border-radius: 2px; background: #e0e0e0;
-      margin-top: 5px; overflow: hidden;
-    }
+    .char-bar { height: 4px; border-radius: 2px; background: #e0e0e0; margin-top: 5px; overflow: hidden; }
     .char-bar-fill { height: 100%; border-radius: 2px; background: #1a73e8; }
     .char-bar-fill.warning { background: #f9ab00; }
     .char-bar-fill.over { background: #d93025; }
 
-    /* ── Empty / status ── */
     .empty { text-align: center; color: #9e9e9e; font-size: 12px; margin-top: 20px; }
-    .status-bar {
-      font-size: 10px; color: #bdbdbd; text-align: right;
-      margin-top: 10px; padding-bottom: 4px;
-    }
-
-    /* ── Loading state ── */
-    .loading {
-      text-align: center; color: #9e9e9e; font-size: 12px;
-      margin-top: 40px;
-    }
-    .spinner {
-      width: 24px; height: 24px; border: 3px solid #e0e0e0;
-      border-top-color: #1a73e8; border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin: 0 auto 10px;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* ── Needs auth state ── */
-    .needs-auth {
-      background: #fff8e1; border: 1px solid #fdd835;
-      border-radius: 8px; padding: 12px; margin-top: 12px;
-      font-size: 12px; color: #5f6368; line-height: 1.5;
-    }
+    .status-bar { font-size: 10px; color: #bdbdbd; text-align: right; margin-top: 10px; padding-bottom: 4px; }
+    .needs-auth { background: #fff8e1; border: 1px solid #fdd835; border-radius: 8px; padding: 12px; margin-top: 12px; font-size: 12px; color: #5f6368; line-height: 1.5; }
     .needs-auth strong { color: #f57f17; }
   </style>
 </head>
@@ -264,10 +189,24 @@
   <!-- Top bar -->
   <div class="topbar">
     <div class="topbar-title">✍️ Writing Analytics <span>Dashboard</span></div>
-    <input class="url-input" id="urlInput" type="text"
-      placeholder="Paste your Google Doc URL here…" />
+    <input class="url-input" id="urlInput" type="text" placeholder="Paste your Google Doc URL here…" />
     <button class="load-btn" onclick="loadDoc()">Open Doc</button>
     <button class="auth-btn" id="authBtn" onclick="handleAuth()">Sign in with Google</button>
+  </div>
+
+  <!-- Highlighter bar -->
+  <div class="highlighter-bar">
+    <span class="hl-label">Highlight:</span>
+    <button class="hl-btn" style="background:#ffff00;" title="Yellow" onclick="applyHighlight('#ffff00')"></button>
+    <button class="hl-btn" style="background:#00ff00;" title="Green" onclick="applyHighlight('#00ff00')"></button>
+    <button class="hl-btn" style="background:#00ffff;" title="Cyan" onclick="applyHighlight('#00ffff')"></button>
+    <button class="hl-btn" style="background:#ff9900;" title="Orange" onclick="applyHighlight('#ff9900')"></button>
+    <button class="hl-btn" style="background:#ff99cc;" title="Pink" onclick="applyHighlight('#ff99cc')"></button>
+    <button class="hl-btn" style="background:#b4a7d6;" title="Purple" onclick="applyHighlight('#b4a7d6')"></button>
+    <button class="hl-btn" style="background:#9fc5e8;" title="Blue" onclick="applyHighlight('#9fc5e8')"></button>
+    <div class="hl-divider"></div>
+    <button class="hl-none-btn" onclick="applyHighlight('none')">Remove</button>
+    <span class="hl-status" id="hlStatus"></span>
   </div>
 
   <!-- Main -->
@@ -290,16 +229,44 @@
           <span class="panel-title">✍️ Writing Analytics</span>
           <button class="reset-btn" onclick="resetBaseline()">Reset</button>
         </div>
+
         <div class="total-card">
           <div class="total-label">New Words This Session</div>
           <div class="total-count" id="totalWords">—</div>
           <div class="total-sub" id="totalSub">Load a doc to begin</div>
         </div>
+
         <div class="active-banner" id="activeBanner">
           <div class="active-label-text">✏️ Currently Writing</div>
           <div class="active-heading-text" id="activeHeading"></div>
           <div class="active-stats-text" id="activeStats"></div>
         </div>
+
+        <!-- Shortcuts -->
+        <div class="shortcuts-panel">
+          <div class="shortcuts-header" onclick="toggleShortcuts()">
+            <span class="shortcuts-title">⌨️ Keyboard Shortcuts</span>
+            <span class="shortcuts-toggle" id="shortcutsToggle">▼ Show</span>
+          </div>
+          <div class="shortcuts-body" id="shortcutsBody">
+            <div class="shortcut-row"><span class="shortcut-label">Heading 1</span><span class="shortcut-key">Ctrl+Alt+1</span></div>
+            <div class="shortcut-row"><span class="shortcut-label">Heading 2</span><span class="shortcut-key">Ctrl+Alt+2</span></div>
+            <div class="shortcut-row"><span class="shortcut-label">Heading 3</span><span class="shortcut-key">Ctrl+Alt+3</span></div>
+            <div class="shortcut-row"><span class="shortcut-label">Normal text</span><span class="shortcut-key">Ctrl+Alt+0</span></div>
+            <div class="shortcut-row"><span class="shortcut-label">Bold</span><span class="shortcut-key">Ctrl+B</span></div>
+            <div class="shortcut-row"><span class="shortcut-label">Italic</span><span class="shortcut-key">Ctrl+I</span></div>
+            <div class="shortcut-row"><span class="shortcut-label">Underline</span><span class="shortcut-key">Ctrl+U</span></div>
+            <div class="shortcut-row"><span class="shortcut-label">Bullet list</span><span class="shortcut-key">Ctrl+Shift+8</span></div>
+            <div class="shortcut-row"><span class="shortcut-label">Numbered list</span><span class="shortcut-key">Ctrl+Shift+7</span></div>
+            <div class="shortcut-row"><span class="shortcut-label">Undo</span><span class="shortcut-key">Ctrl+Z</span></div>
+            <div class="shortcut-row"><span class="shortcut-label">Redo</span><span class="shortcut-key">Ctrl+Y</span></div>
+            <div class="shortcut-row"><span class="shortcut-label">Find & replace</span><span class="shortcut-key">Ctrl+H</span></div>
+            <div class="shortcut-row"><span class="shortcut-label">Insert link</span><span class="shortcut-key">Ctrl+K</span></div>
+            <div class="shortcut-row"><span class="shortcut-label">Word count</span><span class="shortcut-key">Ctrl+Shift+C</span></div>
+            <div class="shortcut-row"><span class="shortcut-label">Highlight color</span><span class="shortcut-key">Use bar above ↑</span></div>
+          </div>
+        </div>
+
         <div id="orphanContainer"></div>
         <div id="sectionsContainer">
           <div class="empty">Load a Google Doc to see section analytics.</div>
@@ -311,36 +278,60 @@
   </div>
 
   <script>
-    // ============================================================
-    // CONFIG — filled in after Google Cloud setup
-    // ============================================================
     var CLIENT_ID = '1018857718455-4ousmcvb2j5ha85b9uatp0q6928dvs83.apps.googleusercontent.com';
     var API_KEY   = 'AIzaSyBsN7w69HYM_9O_ZvBnkhIr98sksWblORQ';
     var SCOPES    = 'https://www.googleapis.com/auth/documents.readonly';
 
-    // ============================================================
-    // STATE
-    // ============================================================
-    var tokenClient   = null;
-    var accessToken   = null;
-    var currentDocId  = null;
-    var baseline      = null;
-    var prevSnapshot  = {};
+    var tokenClient  = null;
+    var accessToken  = null;
+    var currentDocId = null;
+    var baseline     = null;
+    var prevSnapshot = {};
     var lastActiveIdx = -1;
-    var pollTimer     = null;
+    var pollTimer    = null;
 
     var CHAR_KEYWORDS = ['meta description', 'title tag'];
     var WORD_KEYWORDS = ['key takeaways', 'alt text', 'file name'];
     var LIMITS = { 'meta description': 160, 'title tag': 60 };
 
-    // ============================================================
-    // AUTH
-    // ============================================================
-    function initGoogleAuth() {
-      if (typeof google === 'undefined') {
-        setTimeout(initGoogleAuth, 500);
+    // ── Shortcuts toggle ──
+    function toggleShortcuts() {
+      var body   = document.getElementById('shortcutsBody');
+      var toggle = document.getElementById('shortcutsToggle');
+      var open   = body.classList.toggle('open');
+      toggle.textContent = open ? '▲ Hide' : '▼ Show';
+    }
+
+    // ── Highlighter ──
+    function applyHighlight(color) {
+      var frame = document.getElementById('docFrame');
+      var status = document.getElementById('hlStatus');
+      if (!frame || frame.style.display === 'none') {
+        status.textContent = 'Load a doc first';
         return;
       }
+      try {
+        // Focus the iframe first
+        frame.contentWindow.focus();
+        // Try execCommand for highlight
+        if (color === 'none') {
+          frame.contentWindow.document.execCommand('removeFormat', false, null);
+          frame.contentWindow.document.execCommand('hiliteColor', false, 'transparent');
+        } else {
+          frame.contentWindow.document.execCommand('hiliteColor', false, color);
+          frame.contentWindow.document.execCommand('backColor', false, color);
+        }
+        status.textContent = '✓ Applied';
+        setTimeout(function() { status.textContent = ''; }, 2000);
+      } catch(e) {
+        status.textContent = 'Use Ctrl+Alt+H in doc';
+        setTimeout(function() { status.textContent = ''; }, 3000);
+      }
+    }
+
+    // ── Auth ──
+    function initGoogleAuth() {
+      if (typeof google === 'undefined') { setTimeout(initGoogleAuth, 500); return; }
       tokenClient = google.accounts.oauth2.initTokenClient({
         client_id: CLIENT_ID,
         scope: SCOPES,
@@ -359,9 +350,7 @@
       tokenClient.requestAccessToken();
     }
 
-    // ============================================================
-    // DOC LOADING
-    // ============================================================
+    // ── Doc loading ──
     function extractDocId(url) {
       var match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
       return match ? match[1] : null;
@@ -370,40 +359,28 @@
     function loadDoc() {
       var url = document.getElementById('urlInput').value.trim();
       if (!url) return;
-
       var docId = extractDocId(url);
-      if (!docId) {
-        alert('Please paste a valid Google Doc URL.');
-        return;
-      }
+      if (!docId) { alert('Please paste a valid Google Doc URL.'); return; }
+      currentDocId  = docId;
+      baseline      = getStoredBaseline(docId);
+      prevSnapshot  = {};
+      lastActiveIdx = -1;
 
-      currentDocId = docId;
-
-      // Load doc in iframe
       var embedUrl = 'https://docs.google.com/document/d/' + docId + '/edit?usp=sharing&rm=minimal';
       var frame = document.getElementById('docFrame');
       frame.src = embedUrl;
       frame.style.display = 'block';
       document.getElementById('docPlaceholder').style.display = 'none';
 
-      // Reset state for new doc
-      baseline      = getStoredBaseline(docId);
-      prevSnapshot  = {};
-      lastActiveIdx = -1;
-
-      // Start polling if authed
       if (accessToken) {
         startPolling();
       } else {
         document.getElementById('sectionsContainer').innerHTML =
-          '<div class="needs-auth"><strong>Sign in with Google</strong> to enable live word counting. Click "Sign in with Google" in the top bar.</div>';
-        document.getElementById('statusBar').textContent = 'Waiting for Google sign-in…';
+          '<div class="needs-auth"><strong>Sign in with Google</strong> to enable live word counting.</div>';
       }
     }
 
-    // ============================================================
-    // POLLING
-    // ============================================================
+    // ── Polling ──
     function startPolling() {
       if (pollTimer) clearInterval(pollTimer);
       fetchAndRender();
@@ -412,219 +389,118 @@
 
     function fetchAndRender() {
       if (!currentDocId || !accessToken) return;
-
       fetch('https://docs.googleapis.com/v1/documents/' + currentDocId, {
         headers: { 'Authorization': 'Bearer ' + accessToken }
       })
-      .then(function(r) {
-        if (r.status === 401) { accessToken = null; return null; }
-        return r.json();
-      })
+      .then(function(r) { if (r.status === 401) { accessToken = null; return null; } return r.json(); })
       .then(function(doc) {
         if (!doc) return;
         var data = analyzeGoogleDoc(doc);
-
         if (!baseline) {
           baseline = { totalWords: data.totalWords, sections: {} };
           data.sections.forEach(function(s, idx) {
-            baseline.sections[idx] = {
-              headingWords: s.headingWords,
-              bodyWords: s.bodyWords,
-              allSpecialWords: s.allSpecialWords
-            };
+            baseline.sections[idx] = { headingWords: s.headingWords, bodyWords: s.bodyWords, allSpecialWords: s.allSpecialWords };
           });
           storeBaseline(currentDocId, baseline);
         }
-
         render(data);
-        document.getElementById('statusBar').textContent =
-          'Updated ' + new Date().toLocaleTimeString();
+        document.getElementById('statusBar').textContent = 'Updated ' + new Date().toLocaleTimeString();
       })
-      .catch(function(e) {
-        document.getElementById('statusBar').textContent = 'Error: ' + e.message;
-      });
+      .catch(function(e) { document.getElementById('statusBar').textContent = 'Error: ' + e.message; });
     }
 
-    // ============================================================
-    // GOOGLE DOCS API PARSER
-    // ============================================================
+    // ── Google Docs API parser ──
     function analyzeGoogleDoc(doc) {
       var content = doc.body.content || [];
-      var sections = [];
-      var specialSections = [];
-      var currentSection  = null;
-      var currentSpecial  = null;
-      var totalWords      = 0;
+      var sections = [], specialSections = [];
+      var currentSection = null, currentSpecial = null, totalWords = 0;
 
       content.forEach(function(block) {
         if (!block.paragraph) return;
-
-        var para     = block.paragraph;
-        var style    = para.paragraphStyle && para.paragraphStyle.namedStyleType || 'NORMAL_TEXT';
+        var para  = block.paragraph;
+        var style = para.paragraphStyle && para.paragraphStyle.namedStyleType || 'NORMAL_TEXT';
         var isHeading = style.indexOf('HEADING') === 0;
-        var isList   = para.bullet !== undefined;
+        var isList    = para.bullet !== undefined;
 
-        // Get full text of paragraph
         var text = '';
-        (para.elements || []).forEach(function(el) {
-          if (el.textRun) text += el.textRun.content || '';
-        });
+        (para.elements || []).forEach(function(el) { if (el.textRun) text += el.textRun.content || ''; });
         text = text.replace(/\n$/, '').trim();
         if (!text) return;
 
-        // Check if first run is bold
         var firstEl = (para.elements || [])[0];
-        var isBold = firstEl && firstEl.textRun &&
-                     firstEl.textRun.textStyle &&
-                     firstEl.textRun.textStyle.bold === true;
+        var isBold  = firstEl && firstEl.textRun && firstEl.textRun.textStyle && firstEl.textRun.textStyle.bold === true;
 
-        // ── List item ──
         if (isList) {
-          var lwc = countWords(text);
-          totalWords += lwc;
-          if (currentSpecial) {
-            currentSpecial.listWords += lwc;
-            if (currentSection) currentSection.allSpecialWords += lwc;
-          } else if (currentSection) {
-            currentSection.bodyWords += lwc;
-          }
+          var lwc = countWords(text); totalWords += lwc;
+          if (currentSpecial) { currentSpecial.listWords += lwc; if (currentSection) currentSection.allSpecialWords += lwc; }
+          else if (currentSection) currentSection.bodyWords += lwc;
           return;
         }
 
-        // ── Heading ──
         if (isHeading) {
           var level = style.replace('HEADING_', '');
-          var label = 'H' + level;
-          currentSection = {
-            label: label,
-            headingText: text,
-            headingWords: countWords(text),
-            bodyWords: 0,
-            allSpecialWords: 0,
-            specialItems: []
-          };
-          sections.push(currentSection);
-          currentSpecial = null;
-          totalWords += countWords(text);
-          return;
+          currentSection = { label: 'H'+level, headingText: text, headingWords: countWords(text), bodyWords: 0, allSpecialWords: 0, specialItems: [] };
+          sections.push(currentSection); currentSpecial = null; totalWords += countWords(text); return;
         }
 
-        // ── Bold special keyword ──
         if (isBold) {
           var kwType = classifyBoldLine(text);
           if (kwType) {
             var colonIdx = text.indexOf(':');
-            var value    = colonIdx >= 0 ? text.substring(colonIdx + 1).trim() : '';
-            var specialItem = {
-              label:     text.split(':')[0].trim(),
-              type:      kwType,
-              value:     value,
-              wordCount: countWords(value),
-              charCount: value.length,
-              listWords: 0
-            };
-            if (currentSection) {
-              currentSection.specialItems.push(specialItem);
-              currentSection.allSpecialWords += countWords(value);
-            } else {
-              specialSections.push(specialItem);
-            }
-            currentSpecial = specialItem;
-            totalWords += countWords(value);
-            return;
+            var value = colonIdx >= 0 ? text.substring(colonIdx + 1).trim() : '';
+            var specialItem = { label: text.split(':')[0].trim(), type: kwType, value: value, wordCount: countWords(value), charCount: value.length, listWords: 0 };
+            if (currentSection) { currentSection.specialItems.push(specialItem); currentSection.allSpecialWords += countWords(value); }
+            else specialSections.push(specialItem);
+            currentSpecial = specialItem; totalWords += countWords(value); return;
           }
         }
 
-        // ── Regular body ──
         currentSpecial = null;
-        var bwc = countWords(text);
-        totalWords += bwc;
+        var bwc = countWords(text); totalWords += bwc;
         if (currentSection) currentSection.bodyWords += bwc;
       });
 
       return { sections: sections, specialSections: specialSections, totalWords: totalWords };
     }
 
-    // ============================================================
-    // ANALYSIS HELPERS
-    // ============================================================
-    function countWords(text) {
-      var t = (text || '').trim();
-      return t ? t.split(/\s+/).length : 0;
-    }
+    function countWords(text) { var t = (text||'').trim(); return t ? t.split(/\s+/).length : 0; }
 
     function classifyBoldLine(text) {
       var lower = text.toLowerCase().trim();
-      for (var i = 0; i < CHAR_KEYWORDS.length; i++) {
-        if (lower.indexOf(CHAR_KEYWORDS[i]) === 0) return 'char';
-      }
-      for (var j = 0; j < WORD_KEYWORDS.length; j++) {
-        if (lower.indexOf(WORD_KEYWORDS[j]) === 0) return 'word';
-      }
+      for (var i = 0; i < CHAR_KEYWORDS.length; i++) { if (lower.indexOf(CHAR_KEYWORDS[i]) === 0) return 'char'; }
+      for (var j = 0; j < WORD_KEYWORDS.length; j++) { if (lower.indexOf(WORD_KEYWORDS[j]) === 0) return 'word'; }
       return null;
     }
 
     function getLimitForLabel(label) {
       var lower = label.toLowerCase();
-      for (var key in LIMITS) {
-        if (lower.indexOf(key) >= 0) return LIMITS[key];
-      }
+      for (var key in LIMITS) { if (lower.indexOf(key) >= 0) return LIMITS[key]; }
       return null;
     }
 
-    // ============================================================
-    // BASELINE STORAGE
-    // ============================================================
-    function getStoredBaseline(docId) {
-      try {
-        var raw = localStorage.getItem('baseline_' + docId);
-        return raw ? JSON.parse(raw) : null;
-      } catch(e) { return null; }
-    }
+    // ── Baseline storage ──
+    function getStoredBaseline(docId) { try { var r = localStorage.getItem('baseline_'+docId); return r ? JSON.parse(r) : null; } catch(e) { return null; } }
+    function storeBaseline(docId, b) { try { localStorage.setItem('baseline_'+docId, JSON.stringify(b)); } catch(e) {} }
+    function resetBaseline() { if (!currentDocId) return; localStorage.removeItem('baseline_'+currentDocId); baseline = null; fetchAndRender(); }
 
-    function storeBaseline(docId, b) {
-      try { localStorage.setItem('baseline_' + docId, JSON.stringify(b)); } catch(e) {}
-    }
-
-    function resetBaseline() {
-      if (!currentDocId) return;
-      localStorage.removeItem('baseline_' + currentDocId);
-      baseline = null;
-      fetchAndRender();
-    }
-
-    // ============================================================
-    // RENDER
-    // ============================================================
-    function escHtml(str) {
-      return String(str)
-        .replace(/&/g,'&amp;').replace(/</g,'&lt;')
-        .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-    }
+    // ── Render ──
+    function escHtml(str) { return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
     function buildSpecialItem(item) {
-      var limit  = getLimitForLabel(item.label);
+      var limit = getLimitForLabel(item.label);
       var isChar = item.type === 'char';
-      var count  = isChar ? item.charCount : (item.wordCount + (item.listWords || 0));
+      var count  = isChar ? item.charCount : (item.wordCount + (item.listWords||0));
       var unit   = isChar ? ' chars' : ' words';
-
-      var overClass = '';
-      var barHtml = '';
+      var overClass = '', barHtml = '';
       if (isChar && limit) {
-        var pct = Math.min((count / limit) * 100, 100);
+        var pct = Math.min((count/limit)*100, 100);
         var fc  = count > limit ? 'over' : (pct > 80 ? 'warning' : '');
         overClass = count > limit ? ' over' : '';
-        barHtml = '<div class="char-bar"><div class="char-bar-fill ' + fc +
-                  '" style="width:' + pct + '%"></div></div>';
+        barHtml = '<div class="char-bar"><div class="char-bar-fill '+fc+'" style="width:'+pct+'%"></div></div>';
       }
-      var limitNote = limit ? '<span class="s-limit">/ ' + limit + ' max</span>' : '';
-      var valueHtml = item.value ? '<div class="s-value">' + escHtml(item.value) + '</div>' : '';
-
-      return '<div class="special-item">' +
-        '<div class="s-label">' + escHtml(item.label) + '</div>' +
-        valueHtml +
-        '<div class="s-count' + overClass + '">' + count + unit + limitNote + '</div>' +
-        barHtml + '</div>';
+      var limitNote = limit ? '<span class="s-limit">/ '+limit+' max</span>' : '';
+      var valueHtml = item.value ? '<div class="s-value">'+escHtml(item.value)+'</div>' : '';
+      return '<div class="special-item"><div class="s-label">'+escHtml(item.label)+'</div>'+valueHtml+'<div class="s-count'+overClass+'">'+count+unit+limitNote+'</div>'+barHtml+'</div>';
     }
 
     function buildSectionCard(s) {
@@ -632,18 +508,13 @@
       var ac = s.isActive ? ' active' : '';
       var ad = s.isActive ? ' active-dot' : '';
       var specials = '';
-      (s.specialItems || []).forEach(function(item) { specials += buildSpecialItem(item); });
-
-      return '<div class="section-card' + ac + '">' +
-        '<div class="section-heading-row">' +
-          '<span class="badge ' + bc + ad + '">' + s.label + '</span>' +
-          '<span class="heading-title" title="' + escHtml(s.headingText) + '">' + escHtml(s.headingText) + '</span>' +
-        '</div>' +
-        '<div class="stat-row"><span class="stat-label">Heading words</span><span class="stat-value">' + s.headingWords + '</span></div>' +
-        '<div class="stat-row"><span class="stat-label">Body words</span><span class="stat-value">' + s.bodyWords + '</span></div>' +
-        '<div class="stat-row"><span class="stat-label">Section total</span><span class="stat-value total-val">' + s.totalWords + '</span></div>' +
-        (specials || '') +
-        '</div>';
+      (s.specialItems||[]).forEach(function(item) { specials += buildSpecialItem(item); });
+      return '<div class="section-card'+ac+'">'+
+        '<div class="section-heading-row"><span class="badge '+bc+ad+'">'+s.label+'</span><span class="heading-title" title="'+escHtml(s.headingText)+'">'+escHtml(s.headingText)+'</span></div>'+
+        '<div class="stat-row"><span class="stat-label">Heading words</span><span class="stat-value">'+s.headingWords+'</span></div>'+
+        '<div class="stat-row"><span class="stat-label">Body words</span><span class="stat-value">'+s.bodyWords+'</span></div>'+
+        '<div class="stat-row"><span class="stat-label">Section total</span><span class="stat-value total-val">'+s.totalWords+'</span></div>'+
+        (specials||'')+'</div>';
     }
 
     function render(data) {
@@ -651,7 +522,6 @@
       document.getElementById('totalWords').textContent = newWords;
       document.getElementById('totalSub').textContent = 'Baseline locked. Reset to restart.';
 
-      // Active section detection
       var activeSectionIdx = -1;
       data.sections.forEach(function(s, idx) {
         var cur  = s.headingWords + s.bodyWords + s.allSpecialWords;
@@ -661,20 +531,15 @@
       });
       if (activeSectionIdx >= 0) lastActiveIdx = activeSectionIdx;
 
-      // Active banner
       var banner = document.getElementById('activeBanner');
       var activeSection = data.sections[lastActiveIdx] || null;
       if (activeSection) {
         banner.style.display = 'block';
         document.getElementById('activeHeading').textContent = activeSection.headingText;
         document.getElementById('activeStats').textContent =
-          (activeSection.headingWords + activeSection.bodyWords + activeSection.allSpecialWords) +
-          ' total · ' + activeSection.bodyWords + ' body words';
-      } else {
-        banner.style.display = 'none';
-      }
+          (activeSection.headingWords + activeSection.bodyWords + activeSection.allSpecialWords) + ' total · ' + activeSection.bodyWords + ' body words';
+      } else { banner.style.display = 'none'; }
 
-      // Orphan specials
       var orphan = document.getElementById('orphanContainer');
       orphan.innerHTML = '';
       if (data.specialSections && data.specialSections.length) {
@@ -683,44 +548,24 @@
         orphan.innerHTML = h;
       }
 
-      // Sections
       var container = document.getElementById('sectionsContainer');
       if (!data.sections || data.sections.length === 0) {
         container.innerHTML = '<div class="empty">No headings detected yet.<br>Apply H1/H2/H3 styles to create sections.</div>';
         return;
       }
-
       var html = '<div class="divider-label">All Sections</div>';
       data.sections.forEach(function(s, idx) {
-        var base = baseline && baseline.sections[idx]
-          ? baseline.sections[idx] : { headingWords:0, bodyWords:0, allSpecialWords:0 };
-        var specialItems = (s.specialItems || []).map(function(item) {
-          return { label: item.label, type: item.type, value: item.value,
-                   wordCount: item.wordCount + item.listWords, charCount: item.charCount };
+        var specialItems = (s.specialItems||[]).map(function(item) {
+          return { label: item.label, type: item.type, value: item.value, wordCount: item.wordCount + item.listWords, charCount: item.charCount };
         });
-        html += buildSectionCard({
-          label: s.label,
-          headingText: s.headingText,
-          headingWords: s.headingWords,
-          bodyWords: s.bodyWords,
-          totalWords: s.headingWords + s.bodyWords + s.allSpecialWords,
-          specialItems: specialItems,
-          isActive: idx === lastActiveIdx
-        });
+        html += buildSectionCard({ label: s.label, headingText: s.headingText, headingWords: s.headingWords, bodyWords: s.bodyWords,
+          totalWords: s.headingWords + s.bodyWords + s.allSpecialWords, specialItems: specialItems, isActive: idx === lastActiveIdx });
       });
       container.innerHTML = html;
     }
 
-    // ============================================================
-    // INIT
-    // ============================================================
-    window.onload = function() {
-      initGoogleAuth();
-    };
+    window.onload = function() { initGoogleAuth(); };
   </script>
-
-  <!-- Google Identity Services -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-
 </body>
 </html>
