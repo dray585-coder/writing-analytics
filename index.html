@@ -503,7 +503,6 @@
     lastActiveIdx = -1;
     lastDocText   = '';
     loadKeywords();
-    renderKeywords();
     var frame = document.getElementById('docFrame');
     frame.src = 'https://docs.google.com/document/d/' + docId + '/edit?usp=sharing&rm=minimal';
     frame.style.display = 'block';
@@ -537,7 +536,7 @@
         buildKwBaseline(lastDocText);
       }
       render(data);
-      renderKeywords();
+      renderKeywords(); // called after analyzeGoogleDoc sets lastDocText
       document.getElementById('statusBar').textContent = 'Updated ' + new Date().toLocaleTimeString();
     })
     .catch(function(e) { document.getElementById('statusBar').textContent = 'Error: ' + e.message; });
@@ -662,9 +661,14 @@
   }
 
   function render(data) {
-    var newWords = baseline ? Math.max(0, data.totalWords - baseline.totalWords) : 0;
+    var newWords = 0;
+    if (baseline) {
+      newWords = Math.max(0, data.totalWords - baseline.totalWords);
+    }
     document.getElementById('totalWords').textContent = newWords;
-    document.getElementById('totalSub').textContent = 'Baseline locked. Reset to restart.';
+    document.getElementById('totalSub').textContent = baseline
+      ? 'Baseline: ' + baseline.totalWords + ' words. Reset to restart.'
+      : 'Setting baseline…';
 
     // Active section
     var activeSectionIdx = -1;
