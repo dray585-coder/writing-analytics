@@ -271,6 +271,7 @@
   var lastActiveIdx = -1;
   var pollTimer     = null;
   var lastDocText   = '';
+  var kwBaseline    = {}; // baseline keyword counts in pre-existing doc text
 
   var CHAR_KEYWORDS = ['meta description', 'title tag'];
   var WORD_KEYWORDS = ['key takeaways', 'alt text', 'file name'];
@@ -444,7 +445,9 @@
       var html = '';
 
       keywords[tier].forEach(function(kw) {
-        var count = countKeyword(kw.text, lastDocText);
+        var rawCount  = countKeyword(kw.text, lastDocText);
+        var baseCount = kwBaseline[kw.id] !== undefined ? kwBaseline[kw.id] : 0;
+        var count = Math.max(0, rawCount - baseCount);
         var min = null, max = null;
         if (targets) {
           if (tier === 'primary')   { min = targets.primaryMin; max = targets.primaryMax; }
@@ -516,6 +519,7 @@
     prevSnapshot  = {};
     lastActiveIdx = -1;
     lastDocText   = '';
+    kwBaseline    = getStoredKwBaseline(docId) || {};
 
     loadKeywords();
     renderKeywords();
@@ -553,6 +557,7 @@
           baseline.sections[idx] = { headingWords: s.headingWords, bodyWords: s.bodyWords, allSpecialWords: s.allSpecialWords };
         });
         storeBaseline(currentDocId, baseline);
+        buildKwBaseline(lastDocText);
       }
       render(data);
       renderKeywords();
@@ -640,7 +645,21 @@
   // ============================================================
   function getStoredBaseline(docId) { try { var r = localStorage.getItem('baseline_'+docId); return r ? JSON.parse(r) : null; } catch(e) { return null; } }
   function storeBaseline(docId, b) { try { localStorage.setItem('baseline_'+docId, JSON.stringify(b)); } catch(e) {} }
-  function resetBaseline() { if (!currentDocId) return; localStorage.removeItem('baseline_'+currentDocId); baseline = null; fetchAndRender(); }
+  function getStoredKwBaseline(docId) { try { var r = localStorage.getItem('kwbaseline_'+docId); return r ? JSON.parse(r) : null; } catch(e) { return null; } }
+  function storeKwBaseline(docId, b) { try { localStorage.setItem('kwbaseline_'+docId, JSON.stringify(b)); } catch(e) {} }
+  function buildKwBaseline(text) {
+    kwBaseline = {};
+    ['primary','secondary','lsi'].forEach(function(tier) {
+      keywords[tier].forEach(function(kw) { kwBaseline[kw.id] = countKeyword(kw.text, text); });
+    });
+    storeKwBaseline(currentDocId, kwBaseline);
+  }
+  function resetBaseline() {
+    if (!currentDocId) return;
+    localStorage.removeItem('baseline_'+currentDocId);
+    localStorage.removeItem('kwbaseline_'+currentDocId);
+    baseline = null; kwBaseline = {}; fetchAndRender();
+  }
 
   // ============================================================
   // RENDER
