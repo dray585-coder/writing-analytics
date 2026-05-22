@@ -604,25 +604,69 @@
     content.forEach(function(block) {
       // ── Table ──
       if (block.table) {
-        var tableWords = 0;
         (block.table.tableRows || []).forEach(function(row) {
           (row.tableCells || []).forEach(function(cell) {
             (cell.content || []).forEach(function(cellBlock) {
               if (!cellBlock.paragraph) return;
+              var cellPara  = cellBlock.paragraph;
+              var cellStyle = (cellPara.paragraphStyle && cellPara.paragraphStyle.namedStyleType) || 'NORMAL_TEXT';
+              var cellIsHeading = cellStyle.indexOf('HEADING') === 0;
+              var cellIsList    = cellPara.bullet !== undefined;
+
               var cellText = '';
-              (cellBlock.paragraph.elements || []).forEach(function(el) {
+              (cellPara.elements || []).forEach(function(el) {
                 if (el.textRun) cellText += el.textRun.content || '';
               });
               cellText = cellText.replace(/\n$/, '').trim();
-              if (cellText) {
-                fullText += ' ' + cellText;
-                tableWords += countWords(cellText);
+              if (!cellText) return;
+
+              fullText += ' ' + cellText;
+
+              // Heading inside table — start a new section
+              if (cellIsHeading) {
+                var cellLevel = cellStyle.replace('HEADING_', '');
+                currentSection = {
+                  label: 'H'+cellLevel, headingText: cellText,
+                  headingWords: countWords(cellText), bodyWords: 0,
+                  allSpecialWords: 0, specialItems: []
+                };
+                sections.push(currentSection);
+                currentSpecial = null;
+                totalWords += countWords(cellText);
+                return;
               }
+
+              // List item inside table
+              if (cellIsList) {
+                var lwc = countWords(cellText);
+                totalWords += lwc;
+                if (currentSection) currentSection.bodyWords += lwc;
+                return;
+              }
+
+              // Check for bold special keyword inside table
+              var cellFirstEl = (cellPara.elements || [])[0];
+              var cellIsBold  = cellFirstEl && cellFirstEl.textRun && cellFirstEl.textRun.textStyle && cellFirstEl.textRun.textStyle.bold === true;
+              if (cellIsBold) {
+                var cellKwType = classifyBoldLine(cellText);
+                if (cellKwType) {
+                  var cellColonIdx = cellText.indexOf(':');
+                  var cellValue    = cellColonIdx >= 0 ? cellText.substring(cellColonIdx + 1).trim() : '';
+                  var cellItem     = { label: cellText.split(':')[0].trim(), type: cellKwType, value: cellValue, wordCount: countWords(cellValue), charCount: cellValue.length, listWords: 0 };
+                  if (currentSection) { currentSection.specialItems.push(cellItem); currentSection.allSpecialWords += countWords(cellValue); }
+                  else specialSections.push(cellItem);
+                  totalWords += countWords(cellValue);
+                  return;
+                }
+              }
+
+              // Regular body text inside table
+              var twc = countWords(cellText);
+              totalWords += twc;
+              if (currentSection) currentSection.bodyWords += twc;
             });
           });
         });
-        totalWords += tableWords;
-        if (currentSection) currentSection.bodyWords += tableWords;
         return;
       }
 
