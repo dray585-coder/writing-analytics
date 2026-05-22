@@ -602,6 +602,31 @@
     var fullText       = '';
 
     content.forEach(function(block) {
+      // ── Table ──
+      if (block.table) {
+        var tableWords = 0;
+        (block.table.tableRows || []).forEach(function(row) {
+          (row.tableCells || []).forEach(function(cell) {
+            (cell.content || []).forEach(function(cellBlock) {
+              if (!cellBlock.paragraph) return;
+              var cellText = '';
+              (cellBlock.paragraph.elements || []).forEach(function(el) {
+                if (el.textRun) cellText += el.textRun.content || '';
+              });
+              cellText = cellText.replace(/
+$/, '').trim();
+              if (cellText) {
+                fullText += ' ' + cellText;
+                tableWords += countWords(cellText);
+              }
+            });
+          });
+        });
+        totalWords += tableWords;
+        if (currentSection) currentSection.bodyWords += tableWords;
+        return;
+      }
+
       if (!block.paragraph) return;
       var para      = block.paragraph;
       var style     = (para.paragraphStyle && para.paragraphStyle.namedStyleType) || 'NORMAL_TEXT';
