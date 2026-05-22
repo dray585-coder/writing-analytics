@@ -613,8 +613,7 @@
               (cellBlock.paragraph.elements || []).forEach(function(el) {
                 if (el.textRun) cellText += el.textRun.content || '';
               });
-              cellText = cellText.replace(/
-$/, '').trim();
+              cellText = cellText.replace(/\n$/, '').trim();
               if (cellText) {
                 fullText += ' ' + cellText;
                 tableWords += countWords(cellText);
